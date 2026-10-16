@@ -28,7 +28,7 @@ export const lesson = {
       id: "order", tab: "Why the order differs", type: "cards", presentation: "comparison",
       headline: "Why the Order Differs",
       intro: "The Guide’s ordering is reference ordering: the sequence that makes sense when you are looking something up. It is not the sequence in which the work happens, and it is not the sequence in which the concepts become learnable.",
-      instruction: "Compare the two orders side by side. One is arranged for reference; the other follows how the work happens.",
+      instruction: "Select a Knowledge Area to trace how its position changes from the Guide’s reference order to this course’s workflow order.",
       image: "guide-vs-workflow",
       items: [
         {

@@ -176,6 +176,20 @@ function SelectorScreen({ screen, imageFor, visited, onVisit, onComplete }) {
 }
 
 function ComparisonScreen({ screen, onComplete }) {
+  const [activeArea, setActiveArea] = useState("Strategy Analysis");
+  const [reference, workflow] = screen.items;
+  const aliases = {
+    "Planning and Monitoring": "BA Planning and Monitoring",
+    RADD: "Requirements Analysis and Design Definition",
+  };
+  const referenceRows = reference.table.rows.map(([position, label]) => ({
+    position,
+    label,
+    key: aliases[label] || label,
+  }));
+  const workflowRows = workflow.table.rows.map(([position, label]) => ({ position, label, key: label }));
+  const workflowPosition = new Map(workflowRows.map((row, index) => [row.key, index]));
+
   useEffect(() => { onComplete(); }, [onComplete]);
   return (
     <div className="grid-page comparison-page">
@@ -184,13 +198,71 @@ function ComparisonScreen({ screen, onComplete }) {
         {screen.intro && <p className="lead">{screen.intro}</p>}
       </div>
       {screen.instruction && <div className="activity-instruction selector-guide"><Target /><span>{screen.instruction}</span></div>}
-      <div className="order-comparison">
-        {screen.items.map((item, index) => <section className="order-column" key={item.title}>
-          <div className="order-column-heading"><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{item.title}</h3>{item.subtitle && <p>{item.subtitle}</p>}</div></div>
-          {item.text && <p className="order-explanation">{item.text}</p>}
-          <DetailTable table={item.table} />
-          {item.note && <div className="detail-note">{item.note}</div>}
+      <div className="order-context">
+        {screen.items.map((item) => <section key={item.title}>
+          <h3>{item.title}</h3>
+          {item.subtitle && <p className="order-subtitle">{item.subtitle}</p>}
+          {item.text && <p>{item.text}</p>}
         </section>)}
+      </div>
+      <div className="order-map" aria-label="Reference order compared with workflow order">
+        <div className="order-map-head reference-head">
+          <span>The Guide</span>
+          <strong>{reference.table.columns[1]}</strong>
+        </div>
+        <div className="order-map-head workflow-head">
+          <span>This course</span>
+          <strong>{workflow.table.columns[1]}</strong>
+        </div>
+        <div className="order-lane reference-lane">
+          {referenceRows.map((row) => <button
+            type="button"
+            key={row.key}
+            className={activeArea === row.key ? "active" : ""}
+            aria-pressed={activeArea === row.key}
+            onClick={() => setActiveArea(row.key)}
+            onFocus={() => setActiveArea(row.key)}
+          >
+            <span>{row.position}</span><strong>{row.label}</strong>
+          </button>)}
+        </div>
+        <svg className="order-connectors" viewBox="0 0 100 432" preserveAspectRatio="none" aria-hidden="true">
+          {referenceRows.map((row, referenceIndex) => {
+            const workflowIndex = workflowPosition.get(row.key);
+            const y1 = referenceIndex * 72 + 36;
+            const y2 = workflowIndex * 72 + 36;
+            return <path
+              key={row.key}
+              className={activeArea === row.key ? "active" : ""}
+              d={`M 0 ${y1} C 42 ${y1}, 58 ${y2}, 100 ${y2}`}
+              vectorEffect="non-scaling-stroke"
+            />;
+          })}
+        </svg>
+        <div className="order-lane workflow-lane">
+          {workflowRows.map((row) => <button
+            type="button"
+            key={row.key}
+            className={activeArea === row.key ? "active" : ""}
+            aria-pressed={activeArea === row.key}
+            onClick={() => setActiveArea(row.key)}
+            onFocus={() => setActiveArea(row.key)}
+          >
+            <span>{row.position}</span><strong>{row.label}</strong>
+          </button>)}
+        </div>
+      </div>
+      <div className="order-mobile-list" aria-label="How each Knowledge Area moves from reference order to workflow order">
+        {referenceRows.map((row) => {
+          const destination = workflowRows[workflowPosition.get(row.key)];
+          return <button type="button" key={row.key} className={activeArea === row.key ? "active" : ""} onClick={() => setActiveArea(row.key)}>
+            <strong>{destination.label}</strong>
+            <span><b>Guide {row.position}</b><ArrowRight /><b>Course {destination.position}</b></span>
+          </button>;
+        })}
+      </div>
+      <div className="order-exam-notes">
+        {screen.items.map((item) => <div className="detail-note" key={item.title}>{item.note}</div>)}
       </div>
       {screen.anchor && <div className="knowledge-anchor"><Target /><div><strong>Knowledge anchor</strong><p>{screen.anchor}</p></div></div>}
     </div>
