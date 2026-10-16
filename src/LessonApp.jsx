@@ -274,6 +274,8 @@ function JourneyScreen({ screen, visited, onVisit, onComplete }) {
   const steps = screen.items.slice(0, 6);
   const caveats = screen.items.slice(6);
   const item = screen.items[active];
+  const stepsComplete = steps.every((_, index) => visited.has(index));
+  const nextCaveat = !visited.has(6) ? 6 : !visited.has(7) ? 7 : null;
   const allRead = visited.size === screen.items.length;
 
   useEffect(() => { onVisit(active); }, [active]);
@@ -301,11 +303,11 @@ function JourneyScreen({ screen, visited, onVisit, onComplete }) {
         </button>)}
       </div>
       <div className="journey-caveats" aria-label="Important journey caveats">
-        <button type="button" className={`${active === 6 ? "active" : ""} ${visited.has(6) ? "read" : ""}`} onClick={() => setActive(6)}>
-          <Workflow /><span><strong>{caveats[0].title}</strong><small>{caveats[0].subtitle}</small></span>{visited.has(6) && <Check />}
+        <button type="button" className={`${active === 6 ? "active" : ""} ${visited.has(6) ? "read" : ""} ${stepsComplete && nextCaveat === 6 ? "next" : ""}`} onClick={() => setActive(6)}>
+          <Workflow /><span>{stepsComplete && nextCaveat === 6 && <em>Next</em>}<strong>{caveats[0].title}</strong><small>{caveats[0].subtitle}</small></span>{visited.has(6) && <Check />}
         </button>
-        <button type="button" className={`${active === 7 ? "active" : ""} ${visited.has(7) ? "read" : ""}`} onClick={() => setActive(7)}>
-          <RotateCcw /><span><strong>{caveats[1].title}</strong><small>{caveats[1].subtitle}</small></span>{visited.has(7) && <Check />}
+        <button type="button" className={`${active === 7 ? "active" : ""} ${visited.has(7) ? "read" : ""} ${stepsComplete && nextCaveat === 7 ? "next" : ""}`} onClick={() => setActive(7)}>
+          <RotateCcw /><span>{stepsComplete && nextCaveat === 7 && <em>Next</em>}<strong>{caveats[1].title}</strong><small>{caveats[1].subtitle}</small></span>{visited.has(7) && <Check />}
         </button>
       </div>
       <section className={`journey-focus ${active > 5 ? "caveat-focus" : ""}`} role="tabpanel" key={item.title}>
@@ -316,6 +318,9 @@ function JourneyScreen({ screen, visited, onVisit, onComplete }) {
         <h3>{item.title}</h3>
         {item.text && <p>{item.text}</p>}
         {item.note && <div className="detail-note">{item.note}</div>}
+        {stepsComplete && nextCaveat !== null && <button className="journey-next-action" type="button" onClick={() => setActive(nextCaveat)}>
+          Explore Caveat {nextCaveat - 5} <ArrowRight />
+        </button>}
       </section>
       <p className="selector-progress">{visited.size} of {screen.items.length} explored</p>
       {allRead && screen.anchor && <div className="knowledge-anchor"><Target /><div><strong>Knowledge anchor</strong><p>{screen.anchor}</p></div></div>}
