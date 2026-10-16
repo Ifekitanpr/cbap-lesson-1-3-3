@@ -27,6 +27,7 @@ export const lesson = {
       intro: "The Guide’s ordering is reference ordering: the sequence that makes sense when you are looking something up. It is not the sequence in which the work happens, and it is not the sequence in which the concepts become learnable.",
       instruction: "Two cards below. The two ideas to internalise before anything else.",
       image: "guide-vs-workflow",
+      figureCaption: "Figure 1.3.3.a: The same six Knowledge Areas in two orders: one for reference, one for learning.",
       items: [
         {
           title: "The Guide’s order is reference order", subtitle: "It is built for looking things up, not for learning.", image: "guide-vs-workflow",
@@ -35,7 +36,7 @@ export const lesson = {
           table: { columns: ["#", "Reference order"], rows: [["1", "Planning and Monitoring"], ["2", "Elicitation and Collaboration"], ["3", "Requirements Life Cycle Management"], ["4", "Strategy Analysis"], ["5", "RADD"], ["6", "Solution Evaluation"]] },
         },
         {
-          title: "Workflow order", subtitle: "Every module builds on outputs you already understand.", image: "six-step-journey",
+          title: "Workflow order: every module builds on outputs you already understand", subtitle: "Teaching in the order the work happens.", image: "six-step-journey",
           text: "Teaching in workflow order means every module builds on outputs you already understand. By the time you reach RADD, the 30% Knowledge Area, you already know where its inputs came from.",
           note: "On the exam: Exam scenarios hand you an output from one Knowledge Area and ask what happens with it next. Workflow order trains exactly that habit.",
           table: { columns: ["#", "Workflow order"], rows: [["1", "Strategy Analysis"], ["2", "BA Planning and Monitoring"], ["3", "Elicitation and Collaboration"], ["4", "Requirements Analysis and Design Definition"], ["5", "Requirements Life Cycle Management"], ["6", "Solution Evaluation"]] },
@@ -49,6 +50,7 @@ export const lesson = {
       intro: "From business need to realised value. Here is the flow this course follows, and the single question each Knowledge Area answers.",
       instruction: "Two important caveats, both examinable.",
       image: "six-step-journey", pageSize: 3,
+      figureCaption: "Figure 1.3.3.b: The workflow order, with the two caveats drawn in. RLCM runs alongside every step; Strategy Analysis can be revisited from any point.",
       items: [
         { title: "Strategy Analysis", subtitle: "Step 1", text: "Do we need this change at all — and why?" },
         { title: "BA Planning and Monitoring", subtitle: "Step 2", text: "How will we conduct the analysis work?" },
@@ -68,7 +70,7 @@ export const lesson = {
       image: "programme-map", pageSize: 3,
       chart: {
         title: "Blueprint weight by Knowledge Area",
-        caption: "RADD carries twice the weight of any other area.",
+        caption: "Figure 1.3.3.c: Blueprint weight by Knowledge Area (total = 100%). RADD carries twice the weight of any other area.",
         ariaLabel: "Blueprint weight by Knowledge Area, total 100 percent",
         rows: [
           { label: "RADD", value: 30 },
@@ -85,7 +87,7 @@ export const lesson = {
         { title: "Strategy Analysis", subtitle: "Module 3 · 15%", text: "Analyze Current State · Define Future State · Assess Risks · Define Change Strategy" },
         { title: "Business Analysis Planning and Monitoring", subtitle: "Module 4 · 14%", text: "Approach · Stakeholder Engagement · Governance · Information Management · Performance Improvements" },
         { title: "Elicitation and Collaboration", subtitle: "Module 5 · 12%", text: "Prepare · Conduct · Confirm · Communicate · Manage Collaboration" },
-        { title: "Requirements Analysis and Design Definition", subtitle: "Module 6 · 30%", text: "Specify & Model · Verify · Validate · Requirements Architecture · Design Options · Analyze Potential Value", note: "RADD is the 30% Knowledge Area, the heaviest on the blueprint by a wide margin. It is taught in Module 6 because its inputs come from Strategy Analysis, Planning, and Elicitation. Do not read the module number as a measure of importance. Master everything that feeds into RADD, then give RADD your longest study block. On the exam: A gap in RADD costs far more marks than the same gap in a lighter Knowledge Area. Weight your study time accordingly." },
+        { title: "Requirements Analysis and Design Definition", subtitle: "Module 6 · 30%", text: "Specify & Model · Verify · Validate · Requirements Architecture · Design Options · Analyze Potential Value", note: "Why RADD is taught fourth but weighs the most. Sequence follows the work. Study time follows the weight. RADD is the 30% Knowledge Area, the heaviest on the blueprint by a wide margin. It is taught in Module 6 because its inputs come from Strategy Analysis, Planning, and Elicitation. Do not read the module number as a measure of importance. Master everything that feeds into RADD, then give RADD your longest study block. On the exam: A gap in RADD costs far more marks than the same gap in a lighter Knowledge Area. Weight your study time accordingly." },
         { title: "Requirements Life Cycle Management", subtitle: "Module 7 · 15%", text: "Trace · Maintain · Prioritize · Assess Changes · Approve" },
         { title: "Solution Evaluation", subtitle: "Module 8 · 14%", text: "Measure Performance · Analyze Measures · Assess Solution Limitations · Assess Enterprise Limitations · Recommend Actions" },
         { title: "Exam Mastery Sprint", subtitle: "Module 9 · Integrative", text: "Full-length simulations, case-study drills, pacing, targeted remediation" },
@@ -107,7 +109,7 @@ export const lesson = {
         { title: "The Core Concept Model in This Knowledge Area", subtitle: "Section 7", text: "Shows how the concepts relate" },
         { title: "Case Study — FinBridge Pay", subtitle: "Section 8", text: "Applies the Knowledge Area in the programme’s running case" },
       ],
-      after: { title: "Why an identical structure matters", text: "Because every module opens the same way, you always know where to look for the purpose, the concepts, the task list, and the case. By Module 4, you are no longer working out how the page is organised. You are just learning.", note: "On the exam: Time on the exam is scarce. The habit of recognising structure quickly, and finding what a question is really asking, is one you practise every time you open a module." },
+      after: { title: "Why an identical structure matters", text: "Predictable structure frees your attention for the content. Because every module opens the same way, you always know where to look for the purpose, the concepts, the task list, and the case. By Module 4, you are no longer working out how the page is organised. You are just learning.", note: "On the exam: Time on the exam is scarce. The habit of recognising structure quickly, and finding what a question is really asking, is one you practise every time you open a module." },
       anchor: "Every Knowledge Area module (3–8) opens with the same eight sections. Learn the skeleton once and every later module is faster to navigate.",
     },
     {
@@ -117,8 +119,8 @@ export const lesson = {
       image: "lesson-structure",
       items: [
         { title: "Understand", subtitle: "Sections 1–2", bullets: ["Task purpose and description", "TEACH: the concept in plain language"] },
-        { title: "Follow the flow", subtitle: "Sections 3–8", bullets: ["Inputs, and where each one came from", "Elements: the sub-components of the task", "Guidelines and Tools", "Techniques most commonly applied", "Stakeholders involved", "Outputs, and where each one goes next"], note: "Inputs tell you where they came from. Outputs tell you where they go. This is the chain the exam tests. Questions frequently hand you one output and ask what should happen next, or hand you a situation and ask which input is missing." },
-        { title: "Practise", subtitle: "Sections 9–10", bullets: ["SHOW: the task performed in the case study", "APPLY: a guided practice scenario"], note: "TEACH gives you the concept in plain language. SHOW demonstrates the same task being performed in the case study. APPLY puts you in a guided practice scenario. This is the difference between recognising a concept and being able to use it, which is what a case-study-driven exam demands. On the exam: Do not skip APPLY. Recognising a term is not enough when the question puts you inside a scenario and asks for your judgement." },
+        { title: "Follow the flow", subtitle: "Sections 3–8", bullets: ["Inputs, and where each one came from", "Elements: the sub-components of the task", "Guidelines and Tools", "Techniques most commonly applied", "Stakeholders involved", "Outputs, and where each one goes next"], note: "Inputs tell you where they came from. Outputs tell you where they go. This is the chain the exam tests. Sections 3 and 8 are the heart of the pattern. Each input is explained together with where it came from, and each output with where it goes next. That is deliberate. An output of one task is very often an input to another, and following those handoffs is what turns a list of tasks into a connected practice. On the exam: Questions frequently hand you one output and ask what should happen next, or hand you a situation and ask which input is missing." },
+        { title: "Practise", subtitle: "Sections 9–10", bullets: ["SHOW: the task performed in the case study", "APPLY: a guided practice scenario"], note: "TEACH, then SHOW, then APPLY. Learn it, watch it done, then do it. TEACH gives you the concept in plain language. SHOW demonstrates the same task being performed in the case study. APPLY puts you in a guided practice scenario. This is the difference between recognising a concept and being able to use it, which is what a case-study-driven exam demands. On the exam: Do not skip APPLY. Recognising a term is not enough when the question puts you inside a scenario and asks for your judgement." },
         { title: "Lock it in", subtitle: "Sections 11–13", bullets: ["Knowledge Anchor", "Exam Traps", "Flashcards and Knowledge Check"] },
       ],
       anchor: "Every BABOK® task is taught in thirteen sections: understand it, follow its inputs and outputs, watch it performed (SHOW), practise it (APPLY), then lock it in with the Knowledge Anchor, Exam Traps, Flashcards, and Knowledge Check.",
