@@ -17,7 +17,7 @@ export const lesson = {
           "The six-step flow from business need to realised value — and the two caveats that make it more than a straight line.",
           "The nine-module programme map — and the blueprint weight each Knowledge Area carries.",
           "How every module and every lesson is built — eight sections per module, thirteen per BABOK® task.",
-        ], image: "reference-workflow",
+        ], image: "curriculum-overview-modal",
       },
     },
     {
@@ -112,6 +112,7 @@ export const lesson = {
       headline: "Do You Have the Map?",
       intro: "Score yourself before you open Module 1. Study time is your scarcest resource. Check that you can hold the whole map in your head, and let your lowest scores decide what you revisit.",
       image: "curriculum-self-check",
+      lensImage: "curriculum-exam-lens",
       rows: [
         { area: "Reference vs workflow order", ready: "Explain why this course does not follow the Guide’s order", revisit: "Revisit Section 1" },
         { area: "The six-step workflow", ready: "Name each Knowledge Area with the question it answers", revisit: "Revisit Section 2" },
