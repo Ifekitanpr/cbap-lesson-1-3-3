@@ -162,6 +162,8 @@ function SelectorScreen({ screen, imageFor, visited, onVisit, onComplete }) {
             {item.subtitle && <p className="detail-subtitle">{item.subtitle}</p>}
             <h3>{item.title}</h3>
             {item.text && <p>{item.text}</p>}
+            {item.bullets && <ul className="selector-bullets">{item.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>}
+            <DetailTable table={item.table} />
             {item.note && <div className="detail-note">{item.note.split("\n").map((line, index) => <p key={index}>{line || " "}</p>)}</div>}
           </div>
         </div>
@@ -169,6 +171,59 @@ function SelectorScreen({ screen, imageFor, visited, onVisit, onComplete }) {
       <p className="selector-progress">{visited.size} of {screen.items.length} explored</p>
       {allRead && screen.after && <div className="revealed-note"><strong>{screen.after.title}</strong><p>{screen.after.text}</p>{screen.after.note && <small>{screen.after.note}</small>}</div>}
       {allRead && screen.anchor && <div className="knowledge-anchor"><Target /><div><strong>Knowledge anchor</strong><p>{screen.anchor}</p></div></div>}
+    </div>
+  );
+}
+
+function ComparisonScreen({ screen, onComplete }) {
+  useEffect(() => { onComplete(); }, [onComplete]);
+  return (
+    <div className="grid-page comparison-page">
+      <div className="selector-header">
+        <h2>{screen.headline}</h2>
+        {screen.intro && <p className="lead">{screen.intro}</p>}
+      </div>
+      {screen.instruction && <div className="activity-instruction selector-guide"><Target /><span>{screen.instruction}</span></div>}
+      <div className="order-comparison">
+        {screen.items.map((item, index) => <section className="order-column" key={item.title}>
+          <div className="order-column-heading"><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{item.title}</h3>{item.subtitle && <p>{item.subtitle}</p>}</div></div>
+          {item.text && <p className="order-explanation">{item.text}</p>}
+          <DetailTable table={item.table} />
+          {item.note && <div className="detail-note">{item.note}</div>}
+        </section>)}
+      </div>
+      {screen.anchor && <div className="knowledge-anchor"><Target /><div><strong>Knowledge anchor</strong><p>{screen.anchor}</p></div></div>}
+    </div>
+  );
+}
+
+function ProgrammeMapScreen({ screen, onComplete }) {
+  const [insightOpen, setInsightOpen] = useState(false);
+  useEffect(() => { if (insightOpen) onComplete(); }, [insightOpen, onComplete]);
+  return (
+    <div className="grid-page programme-map-page">
+      <div className="selector-header programme-map-header">
+        <h2>{screen.headline}</h2>
+        {screen.intro && <p className="lead">{screen.intro}</p>}
+      </div>
+      {screen.instruction && <div className="activity-instruction selector-guide"><Target /><span>{screen.instruction}</span></div>}
+      <BarChart chart={screen.chart} />
+      <div className="programme-roadmap" aria-label="Nine-module programme roadmap">
+        {screen.items.map((item, index) => <article className={`programme-module ${item.emphasis ? "emphasis" : ""}`} key={item.title}>
+          <div className="module-sequence"><span>{String(index + 1).padStart(2, "0")}</span></div>
+          <p>{item.subtitle}</p>
+          <h3>{item.title}</h3>
+          <div>{item.text}</div>
+        </article>)}
+      </div>
+      <div className="programme-insight">
+        <button type="button" aria-expanded={insightOpen} onClick={() => setInsightOpen((value) => !value)}>
+          <span><Target /><strong>{screen.insight.title}</strong></span>
+          <span>{insightOpen ? "Hide insight" : "Show insight"} <ArrowRight /></span>
+        </button>
+        {insightOpen && <div className="programme-insight-detail"><p>{screen.insight.text}</p><div className="detail-note">{screen.insight.note}</div></div>}
+      </div>
+      {insightOpen && screen.anchor && <div className="knowledge-anchor"><Target /><div><strong>Knowledge anchor</strong><p>{screen.anchor}</p></div></div>}
     </div>
   );
 }
@@ -205,7 +260,9 @@ function GroupedExploreScreen({ screen, imageFor, onComplete }) {
       <div className="subsection-stage" key={subsection.id}>
         {subsection.presentation === "selector"
           ? <SelectorScreen screen={subsection} imageFor={imageFor} visited={subsectionVisited} onVisit={visitSubsectionItem} onComplete={markSubsectionComplete} />
-          : <ExploreScreen screen={subsection} imageFor={imageFor} visited={subsectionVisited} onVisit={visitSubsectionItem} onComplete={markSubsectionComplete} />}
+          : subsection.presentation === "comparison"
+            ? <ComparisonScreen screen={subsection} onComplete={markSubsectionComplete} />
+            : <ExploreScreen screen={subsection} imageFor={imageFor} visited={subsectionVisited} onVisit={visitSubsectionItem} onComplete={markSubsectionComplete} />}
       </div>
       <div className="subsection-footer">
         <span>{active + 1} of {screen.subsections.length}</span>
@@ -419,6 +476,7 @@ export function LessonApp({ lesson, imageFor }) {
           <section className="lesson-content" key={screen.id}>
             {screen.type === "reveal" && <RevealScreen screen={enrichedScreen} imageFor={imageFor} complete={completed[screenIndex]} onComplete={markComplete} />}
             {screen.type === "grouped" && <GroupedExploreScreen screen={enrichedScreen} imageFor={imageFor} onComplete={markComplete} />}
+            {screen.type === "programmemap" && <ProgrammeMapScreen screen={enrichedScreen} onComplete={markComplete} />}
             {(screen.type === "cards" || screen.type === "pager") && (screen.presentation === "selector" ? <SelectorScreen screen={enrichedScreen} imageFor={imageFor} visited={currentVisited} onVisit={visitItem} onComplete={markComplete} /> : <ExploreScreen screen={enrichedScreen} imageFor={imageFor} visited={currentVisited} onVisit={visitItem} onComplete={markComplete} />)}
             {screen.type === "selfcheck" && <SelfCheckScreen screen={enrichedScreen} onComplete={markComplete} />}
             {screen.type === "knowledgecheck" && <KnowledgeCheckScreen screen={enrichedScreen} imageFor={imageFor} complete={completed[screenIndex]} onComplete={markComplete} />}

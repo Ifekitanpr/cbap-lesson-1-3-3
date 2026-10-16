@@ -25,10 +25,10 @@ export const lesson = {
       id: "reference-workflow", tab: "Reference & workflow", type: "grouped", completionLabel: "Reference and workflow complete",
       subsections: [
     {
-      id: "order", tab: "Why the order differs", type: "cards",
+      id: "order", tab: "Why the order differs", type: "cards", presentation: "comparison",
       headline: "Why the Order Differs",
       intro: "The Guide’s ordering is reference ordering: the sequence that makes sense when you are looking something up. It is not the sequence in which the work happens, and it is not the sequence in which the concepts become learnable.",
-      instruction: "Click both cards to explore the two ideas to internalise before anything else.",
+      instruction: "Compare the two orders side by side. One is arranged for reference; the other follows how the work happens.",
       image: "guide-vs-workflow",
       items: [
         {
@@ -67,10 +67,10 @@ export const lesson = {
       ],
     },
     {
-      id: "programme", tab: "Programme map", type: "pager",
+      id: "programme", tab: "Programme map", type: "programmemap",
       headline: "The Full Programme Map",
       intro: "Nine modules, one arc. Modules 1 and 2 give you the foundations and the toolkit. Modules 3 to 8 are the six Knowledge Areas in workflow order. Module 9 pulls everything together for the exam.",
-      instruction: "Click each module to explore the full programme.",
+      instruction: "Scan the nine modules in sequence, then open the planning insight below.",
       image: "programme-map", pageSize: 3,
       chart: {
         title: "Blueprint weight by Knowledge Area",
@@ -90,11 +90,16 @@ export const lesson = {
         { title: "Strategy Analysis", subtitle: "Module 3 · 15%", text: "Analyze Current State · Define Future State · Assess Risks · Define Change Strategy" },
         { title: "Business Analysis Planning and Monitoring", subtitle: "Module 4 · 14%", text: "Approach · Stakeholder Engagement · Governance · Information Management · Performance Improvements" },
         { title: "Elicitation and Collaboration", subtitle: "Module 5 · 12%", text: "Prepare · Conduct · Confirm · Communicate · Manage Collaboration" },
-        { title: "Requirements Analysis and Design Definition", subtitle: "Module 6 · 30%", text: "Specify & Model · Verify · Validate · Requirements Architecture · Design Options · Analyze Potential Value", note: "Why RADD is taught fourth but weighs the most. Sequence follows the work. Study time follows the weight. RADD is the 30% Knowledge Area, the heaviest on the blueprint by a wide margin. It is taught in Module 6 because its inputs come from Strategy Analysis, Planning, and Elicitation. Do not read the module number as a measure of importance. Master everything that feeds into RADD, then give RADD your longest study block. On the exam: A gap in RADD costs far more marks than the same gap in a lighter Knowledge Area. Weight your study time accordingly." },
+        { title: "Requirements Analysis and Design Definition", subtitle: "Module 6 · 30%", text: "Specify & Model · Verify · Validate · Requirements Architecture · Design Options · Analyze Potential Value", emphasis: true },
         { title: "Requirements Life Cycle Management", subtitle: "Module 7 · 15%", text: "Trace · Maintain · Prioritize · Assess Changes · Approve" },
         { title: "Solution Evaluation", subtitle: "Module 8 · 14%", text: "Measure Performance · Analyze Measures · Assess Solution Limitations · Assess Enterprise Limitations · Recommend Actions" },
         { title: "Exam Mastery Sprint", subtitle: "Module 9 · Integrative", text: "Full-length simulations, case-study drills, pacing, targeted remediation" },
       ],
+      insight: {
+        title: "Why RADD is taught fourth but weighs the most",
+        text: "Sequence follows the work. Study time follows the weight. RADD is the 30% Knowledge Area, the heaviest on the blueprint by a wide margin. It is taught in Module 6 because its inputs come from Strategy Analysis, Planning, and Elicitation. Do not read the module number as a measure of importance. Master everything that feeds into RADD, then give RADD your longest study block.",
+        note: "On the exam: A gap in RADD costs far more marks than the same gap in a lighter Knowledge Area. Weight your study time accordingly.",
+      },
       anchor: "Nine modules: foundations (1), toolkit (2), six Knowledge Areas in workflow order (3–8), exam sprint (9). RADD carries 30% of the blueprint. The other five Knowledge Areas range from 12% to 15%.",
     },
     {
@@ -120,7 +125,7 @@ export const lesson = {
       anchor: "Every Knowledge Area module (3–8) opens with the same eight sections. Learn the skeleton once and every later module is faster to navigate.",
     },
     {
-      id: "lesson-structure", tab: "Lesson structure", type: "cards",
+      id: "lesson-structure", tab: "Lesson structure", type: "cards", presentation: "selector",
       headline: "How Each Lesson Is Built",
       intro: "Thirteen sections per BABOK® task. Inside each module, every BABOK® task gets its own lesson, and every lesson follows the same thirteen-section pattern, grouped here into four phases.",
       instruction: "Click each phase to explore the thirteen-section lesson pattern.",
