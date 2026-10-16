@@ -106,7 +106,7 @@ export const lesson = {
       id: "course-structure", tab: "Course structure", type: "grouped", completionLabel: "Course structure complete",
       subsections: [
     {
-      id: "module-structure", tab: "Module structure", type: "pager", presentation: "selector",
+      id: "module-structure", tab: "Module structure", type: "pager", presentation: "moduleblueprint",
       headline: "How Each Knowledge Area Module Is Built",
       intro: "Same skeleton, every module. Every module from 3 through 8 follows an identical dual-level structure, so that by Module 4 you are no longer spending attention on navigation. This section covers the first level: the module.",
       instruction: "Click each section to see what it does for you.",

@@ -328,6 +328,59 @@ function JourneyScreen({ screen, visited, onVisit, onComplete }) {
   );
 }
 
+function ModuleBlueprintScreen({ screen, visited, onVisit, onComplete }) {
+  const [active, setActive] = useState(0);
+  const allRead = visited.size === screen.items.length;
+
+  useEffect(() => { onVisit(active); }, [active]);
+  useEffect(() => { if (allRead) onComplete(); }, [allRead, onComplete]);
+
+  return (
+    <div className="grid-page module-blueprint-page">
+      <div className="selector-header module-blueprint-header">
+        <h2>{screen.headline}</h2>
+        {screen.intro && <p className="lead">{screen.intro}</p>}
+      </div>
+      {screen.instruction && <div className="activity-instruction selector-guide"><Target /><span>{screen.instruction}</span></div>}
+
+      <section className="module-blueprint" aria-labelledby="module-blueprint-label">
+        <div className="module-blueprint-label">
+          <h3 id="module-blueprint-label">One repeatable structure</h3>
+          <p><strong>{visited.size}</strong> of {screen.items.length} sections explored</p>
+        </div>
+
+        <ol className="module-blueprint-steps">
+          {screen.items.map((item, index) => {
+            const expanded = active === index;
+            const read = visited.has(index);
+            return <li className={`${expanded ? "active" : ""} ${read ? "read" : ""}`} key={item.title}>
+              <button
+                type="button"
+                aria-expanded={expanded}
+                aria-controls={`module-section-${index}`}
+                onClick={() => setActive(index)}
+              >
+                <span className="module-step-number">{String(index + 1).padStart(2, "0")}</span>
+                <span className="module-step-copy">
+                  <small>{item.subtitle}</small>
+                  <strong>{item.title}</strong>
+                </span>
+                <span className="module-step-state">{read && !expanded ? <Check /> : <ArrowRight />}</span>
+              </button>
+              {expanded && <div className="module-step-detail" id={`module-section-${index}`}>
+                <p>{item.text}</p>
+              </div>}
+            </li>;
+          })}
+        </ol>
+      </section>
+
+      {allRead && screen.after && <div className="revealed-note"><strong>{screen.after.title}</strong><p>{screen.after.text}</p>{screen.after.note && <small>{screen.after.note}</small>}</div>}
+      {allRead && screen.anchor && <div className="knowledge-anchor"><Target /><div><strong>Knowledge anchor</strong><p>{screen.anchor}</p></div></div>}
+    </div>
+  );
+}
+
 function ProgrammeMapScreen({ screen, onComplete }) {
   const [insightOpen, setInsightOpen] = useState(false);
   useEffect(() => { if (insightOpen) onComplete(); }, [insightOpen, onComplete]);
@@ -389,8 +442,10 @@ function GroupedExploreScreen({ screen, imageFor, onComplete }) {
         </button>)}
       </nav>
       <div className="subsection-stage" key={subsection.id}>
-        {subsection.presentation === "selector"
-          ? <SelectorScreen screen={subsection} imageFor={imageFor} visited={subsectionVisited} onVisit={visitSubsectionItem} onComplete={markSubsectionComplete} />
+        {subsection.presentation === "moduleblueprint"
+          ? <ModuleBlueprintScreen screen={subsection} visited={subsectionVisited} onVisit={visitSubsectionItem} onComplete={markSubsectionComplete} />
+          : subsection.presentation === "selector"
+            ? <SelectorScreen screen={subsection} imageFor={imageFor} visited={subsectionVisited} onVisit={visitSubsectionItem} onComplete={markSubsectionComplete} />
           : subsection.presentation === "comparison"
             ? <ComparisonScreen screen={subsection} onComplete={markSubsectionComplete} />
             : subsection.presentation === "journey"
