@@ -12,6 +12,7 @@ export const lesson = {
       reveal: {
         title: "The design principle behind this curriculum",
         text: "The BABOK® Guide lists its Knowledge Areas in a fixed order: Planning and Monitoring, Elicitation and Collaboration, Requirements Life Cycle Management, Strategy Analysis, RADD, Solution Evaluation. We do not teach them in that order, and there is a reason.",
+        bulletsTitle: "What You’ll Learn",
         bullets: [
           "Why this course uses workflow order — and why the BABOK® Guide’s reference order is the wrong sequence to learn in.",
           "The six-step flow from business need to realised value — and the two caveats that make it more than a straight line.",
@@ -24,6 +25,7 @@ export const lesson = {
       id: "order", tab: "Why the order differs", type: "cards",
       headline: "Why the Order Differs",
       intro: "The Guide’s ordering is reference ordering: the sequence that makes sense when you are looking something up. It is not the sequence in which the work happens, and it is not the sequence in which the concepts become learnable.",
+      instruction: "Two cards below. The two ideas to internalise before anything else.",
       image: "guide-vs-workflow",
       items: [
         {
@@ -45,6 +47,7 @@ export const lesson = {
       id: "journey", tab: "Six-step journey", type: "pager",
       headline: "The Six-Step Journey",
       intro: "From business need to realised value. Here is the flow this course follows, and the single question each Knowledge Area answers.",
+      instruction: "Two important caveats, both examinable.",
       image: "six-step-journey", pageSize: 3,
       items: [
         { title: "Strategy Analysis", subtitle: "Step 1", text: "Do we need this change at all — and why?" },
@@ -63,6 +66,19 @@ export const lesson = {
       headline: "The Full Programme Map",
       intro: "Nine modules, one arc. Modules 1 and 2 give you the foundations and the toolkit. Modules 3 to 8 are the six Knowledge Areas in workflow order. Module 9 pulls everything together for the exam.",
       image: "programme-map", pageSize: 3,
+      chart: {
+        title: "Blueprint weight by Knowledge Area",
+        caption: "RADD carries twice the weight of any other area.",
+        ariaLabel: "Blueprint weight by Knowledge Area, total 100 percent",
+        rows: [
+          { label: "RADD", value: 30 },
+          { label: "Strategy Analysis", value: 15 },
+          { label: "Requirements Life Cycle Management", value: 15 },
+          { label: "BA Planning and Monitoring", value: 14 },
+          { label: "Solution Evaluation", value: 14 },
+          { label: "Elicitation and Collaboration", value: 12 },
+        ],
+      },
       items: [
         { title: "Foundations of Business Analysis and the CBAP®", subtitle: "Module 1 · Foundational", text: "The profession, IIBA®, the BABOK® architecture, BACCM™, key concepts, the exam" },
         { title: "The Business Analyst’s Toolkit", subtitle: "Module 2 · Cross-cutting", text: "The 50 techniques, the 6 underlying competencies, the 5 perspectives" },
@@ -113,6 +129,7 @@ export const lesson = {
       intro: "Score yourself before you open Module 1. Study time is your scarcest resource. Check that you can hold the whole map in your head, and let your lowest scores decide what you revisit.",
       image: "curriculum-self-check",
       lensImage: "curriculum-exam-lens",
+      instruction: "Score yourself 1 to 4 in each row. 1 = shaky · 2 = developing · 3 = solid · 4 = orientation-ready. Return to this table as you progress through the modules.",
       rows: [
         { area: "Reference vs workflow order", ready: "Explain why this course does not follow the Guide’s order", revisit: "Revisit Section 1" },
         { area: "The six-step workflow", ready: "Name each Knowledge Area with the question it answers", revisit: "Revisit Section 2" },
@@ -121,9 +138,14 @@ export const lesson = {
         { area: "Module and lesson structure", ready: "Describe the 8-section module and the 13-section lesson", revisit: "Revisit Sections 4–5" },
       ],
       scale: ["Shaky", "Developing", "Solid", "Orientation-ready"],
+      howTo: "Find the rows where your score is furthest from 4. Return to the matching section before you start Module 1.",
+      crosswalkTitle: "The programme crosswalk",
+      crosswalkIntro: "Every row is one step in the workflow. Read across to see which module teaches it, the question it answers, and its blueprint weight. Return to this table whenever a later lesson feels disorienting.",
       crosswalk: { columns: ["Step", "Knowledge Area", "Module", "Question it answers", "Weight"], rows: [["1", "Strategy Analysis", "3", "Do we need this change at all, and why?", "15%"], ["2", "BA Planning and Monitoring", "4", "How will we conduct the analysis work?", "14%"], ["3", "Elicitation and Collaboration", "5", "What do stakeholders actually need?", "12%"], ["4", "Requirements Analysis and Design Definition", "6", "What should we build, and is it right?", "30%"], ["5", "Requirements Life Cycle Management", "7", "Is everyone aligned, traced, and current?", "15%"], ["6", "Solution Evaluation", "8", "Did it deliver the value we promised?", "14%"]] },
+      crosswalkCaption: "The programme spine. Modules 1–2 lay the foundations and toolkit. Modules 3–8 tile the six Knowledge Areas in workflow order. Module 9 is the exam mastery sprint.",
       examLens: "This orientation lesson rarely produces a direct question, but its ideas underpin every scenario you will face. The exam does not test the order of the Guide. It tests how you apply Knowledge Areas to a situation. RLCM is continuous. If a requirement exists, RLCM is already in play. Strategy Analysis is revisitable. A changed business need sends you back to it. RADD carries 30%. Weight your study time accordingly. Follow the thread: ask where an output came from and where it goes next.",
       summary: "WORKFLOW ORDER = Strategy Analysis → BA Planning and Monitoring → Elicitation and Collaboration → RADD → RLCM → Solution Evaluation. The course Modules 3–8. REFERENCE ORDER = the BABOK® Guide’s fixed sequence, arranged for looking things up. CAVEATS = RLCM is continuous; Strategy Analysis is revisitable. STRUCTURE = eight sections per Knowledge Area module; thirteen sections per BABOK® task lesson. The join to remember: the Guide gives you the reference. The workflow gives you the sequence.",
+      summaryTitle: "Framework Crosswalk · Six Questions, One Initiative",
     },
   ],
 };
