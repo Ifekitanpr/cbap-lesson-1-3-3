@@ -24,16 +24,16 @@ export const lesson = {
       id: "order", tab: "Why the order differs", type: "cards",
       headline: "Why the Order Differs",
       intro: "The Guide’s ordering is reference ordering: the sequence that makes sense when you are looking something up. It is not the sequence in which the work happens, and it is not the sequence in which the concepts become learnable.",
-      image: "reference-workflow",
+      image: "guide-vs-workflow",
       items: [
         {
-          title: "The Guide’s order is reference order", subtitle: "It is built for looking things up, not for learning.",
+          title: "The Guide’s order is reference order", subtitle: "It is built for looking things up, not for learning.", image: "guide-vs-workflow",
           text: "A reference book has to pick one fixed order and stay with it. A learner needs an order where each idea builds on the last.",
           note: "On the exam: You will not be asked to recite the Guide’s Knowledge Area order. You will be asked to apply Knowledge Areas to a live situation, and that requires understanding how they relate in practice.",
           table: { columns: ["#", "Reference order"], rows: [["1", "Planning and Monitoring"], ["2", "Elicitation and Collaboration"], ["3", "Requirements Life Cycle Management"], ["4", "Strategy Analysis"], ["5", "RADD"], ["6", "Solution Evaluation"]] },
         },
         {
-          title: "Workflow order", subtitle: "Every module builds on outputs you already understand.",
+          title: "Workflow order", subtitle: "Every module builds on outputs you already understand.", image: "six-step-journey",
           text: "Teaching in workflow order means every module builds on outputs you already understand. By the time you reach RADD, the 30% Knowledge Area, you already know where its inputs came from.",
           note: "On the exam: Exam scenarios hand you an output from one Knowledge Area and ask what happens with it next. Workflow order trains exactly that habit.",
           table: { columns: ["#", "Workflow order"], rows: [["1", "Strategy Analysis"], ["2", "BA Planning and Monitoring"], ["3", "Elicitation and Collaboration"], ["4", "Requirements Analysis and Design Definition"], ["5", "Requirements Life Cycle Management"], ["6", "Solution Evaluation"]] },
@@ -53,8 +53,8 @@ export const lesson = {
         { title: "Requirements Analysis and Design Definition", subtitle: "Step 4", text: "What should we build, and is it right?" },
         { title: "Requirements Life Cycle Management", subtitle: "Step 5", text: "Is everyone aligned, traced, and current?" },
         { title: "Solution Evaluation", subtitle: "Step 6", text: "Did it deliver the value we promised?" },
-        { title: "Caveat 1: Requirements Life Cycle Management is continuous", subtitle: "Shown as step 5 for teaching. It runs the whole time.", text: "RLCM is shown as step 5 for teaching purposes, but it runs alongside every other Knowledge Area from the moment the first requirement exists.", note: "On the exam: Reject any answer that treats RLCM as something you start only after requirements are analysed. If a requirement exists, RLCM is already in play." },
-        { title: "Caveat 2: Strategy Analysis is revisitable", subtitle: "The business need can change, and when it does, you go back.", text: "Strategy Analysis is step 1, but it is not a gate you pass through once. If the business need changes, you return to it, at any point in the initiative.", note: "On the exam: When a scenario describes a changed business need mid-initiative, the strongest answer is often to revisit Strategy Analysis rather than push on with the original plan." },
+        { title: "Caveat 1: Requirements Life Cycle Management is continuous", subtitle: "Shown as step 5 for teaching. It runs the whole time.", text: "RLCM is shown as step 5 for teaching purposes, but it runs alongside every other Knowledge Area from the moment the first requirement exists.", note: "On the exam: Reject any answer that treats RLCM as something you start only after requirements are analysed. If a requirement exists, RLCM is already in play.", image: "rlcm-continuous" },
+        { title: "Caveat 2: Strategy Analysis is revisitable", subtitle: "The business need can change, and when it does, you go back.", text: "Strategy Analysis is step 1, but it is not a gate you pass through once. If the business need changes, you return to it, at any point in the initiative.", note: "On the exam: When a scenario describes a changed business need mid-initiative, the strongest answer is often to revisit Strategy Analysis rather than push on with the original plan.", image: "strategy-revisitable" },
       ],
       anchor: "Six steps, six questions: Why change? How will we analyse? What do stakeholders need? What should we build? Is it all aligned? Did it deliver value? Two caveats: RLCM is continuous, and Strategy Analysis is revisitable.",
     },
@@ -80,7 +80,7 @@ export const lesson = {
       id: "module-structure", tab: "Module structure", type: "pager",
       headline: "How Each Knowledge Area Module Is Built",
       intro: "Same skeleton, every module. Every module from 3 through 8 follows an identical dual-level structure, so that by Module 4 you are no longer spending attention on navigation. This section covers the first level: the module.",
-      image: "lesson-structure", pageSize: 4,
+      image: "module-structure", pageSize: 4,
       items: [
         { title: "Module Overview", subtitle: "Section 1", text: "Orients you to the Knowledge Area" },
         { title: "Key Concepts to Look Out For", subtitle: "Section 2", text: "Flags the ideas that matter most before you start" },
@@ -111,7 +111,7 @@ export const lesson = {
       id: "self-check", tab: "Self-check", type: "selfcheck",
       headline: "Do You Have the Map?",
       intro: "Score yourself before you open Module 1. Study time is your scarcest resource. Check that you can hold the whole map in your head, and let your lowest scores decide what you revisit.",
-      image: "programme-map",
+      image: "curriculum-self-check",
       rows: [
         { area: "Reference vs workflow order", ready: "Explain why this course does not follow the Guide’s order", revisit: "Revisit Section 1" },
         { area: "The six-step workflow", ready: "Name each Knowledge Area with the question it answers", revisit: "Revisit Section 2" },
