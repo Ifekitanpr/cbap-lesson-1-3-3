@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { ArrowLeft, ArrowRight, BookOpen, Check, Compass, FileCheck2, FileText, Layers3, ListChecks, Menu, Route, ShieldCheck, Target, Users, Volume2, VolumeX, Workflow, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, Check, Compass, FileCheck2, FileText, Layers3, ListChecks, Menu, RotateCcw, Route, ShieldCheck, Target, Users, Volume2, VolumeX, Workflow, X } from "lucide-react";
 import { useLessonAudio } from "./useLessonAudio";
 
 function DetailTable({ table }) {
@@ -269,6 +269,60 @@ function ComparisonScreen({ screen, onComplete }) {
   );
 }
 
+function JourneyScreen({ screen, visited, onVisit, onComplete }) {
+  const [active, setActive] = useState(0);
+  const steps = screen.items.slice(0, 6);
+  const caveats = screen.items.slice(6);
+  const item = screen.items[active];
+  const allRead = visited.size === screen.items.length;
+
+  useEffect(() => { onVisit(active); }, [active]);
+  useEffect(() => { if (allRead) onComplete(); }, [allRead, onComplete]);
+
+  return (
+    <div className="grid-page journey-page">
+      <div className="selector-header journey-header">
+        <h2>{screen.headline}</h2>
+        {screen.intro && <p className="lead">{screen.intro}</p>}
+      </div>
+      {screen.instruction && <div className="activity-instruction selector-guide"><Target /><span>{screen.instruction}</span></div>}
+      <div className="journey-route" role="tablist" aria-label="Six-step business analysis journey">
+        {steps.map((step, index) => <button
+          type="button"
+          role="tab"
+          aria-selected={active === index}
+          className={`${active === index ? "active" : ""} ${visited.has(index) ? "read" : ""}`}
+          key={step.title}
+          onClick={() => setActive(index)}
+        >
+          <span>{index + 1}</span>
+          <strong>{step.title}</strong>
+          {visited.has(index) && <Check />}
+        </button>)}
+      </div>
+      <div className="journey-caveats" aria-label="Important journey caveats">
+        <button type="button" className={`${active === 6 ? "active" : ""} ${visited.has(6) ? "read" : ""}`} onClick={() => setActive(6)}>
+          <Workflow /><span><strong>{caveats[0].title}</strong><small>{caveats[0].subtitle}</small></span>{visited.has(6) && <Check />}
+        </button>
+        <button type="button" className={`${active === 7 ? "active" : ""} ${visited.has(7) ? "read" : ""}`} onClick={() => setActive(7)}>
+          <RotateCcw /><span><strong>{caveats[1].title}</strong><small>{caveats[1].subtitle}</small></span>{visited.has(7) && <Check />}
+        </button>
+      </div>
+      <section className={`journey-focus ${active > 5 ? "caveat-focus" : ""}`} role="tabpanel" key={item.title}>
+        <div className="journey-focus-meta">
+          <span>{item.subtitle}</span>
+          <strong>{active < 6 ? `${active + 1} of 6` : `Caveat ${active - 5} of 2`}</strong>
+        </div>
+        <h3>{item.title}</h3>
+        {item.text && <p>{item.text}</p>}
+        {item.note && <div className="detail-note">{item.note}</div>}
+      </section>
+      <p className="selector-progress">{visited.size} of {screen.items.length} explored</p>
+      {allRead && screen.anchor && <div className="knowledge-anchor"><Target /><div><strong>Knowledge anchor</strong><p>{screen.anchor}</p></div></div>}
+    </div>
+  );
+}
+
 function ProgrammeMapScreen({ screen, onComplete }) {
   const [insightOpen, setInsightOpen] = useState(false);
   useEffect(() => { if (insightOpen) onComplete(); }, [insightOpen, onComplete]);
@@ -334,6 +388,8 @@ function GroupedExploreScreen({ screen, imageFor, onComplete }) {
           ? <SelectorScreen screen={subsection} imageFor={imageFor} visited={subsectionVisited} onVisit={visitSubsectionItem} onComplete={markSubsectionComplete} />
           : subsection.presentation === "comparison"
             ? <ComparisonScreen screen={subsection} onComplete={markSubsectionComplete} />
+            : subsection.presentation === "journey"
+              ? <JourneyScreen screen={subsection} visited={subsectionVisited} onVisit={visitSubsectionItem} onComplete={markSubsectionComplete} />
             : <ExploreScreen screen={subsection} imageFor={imageFor} visited={subsectionVisited} onVisit={visitSubsectionItem} onComplete={markSubsectionComplete} />}
       </div>
       <div className="subsection-footer">

@@ -51,7 +51,7 @@ export const lesson = {
       headline: "The Six-Step Journey",
       intro: "From business need to realised value. Here is the flow this course follows, and the single question each Knowledge Area answers.",
       instruction: "Click each step and both caveats to explore the complete journey.",
-      image: "six-step-journey", pageSize: 3, presentation: "selector",
+      image: "six-step-journey", pageSize: 3, presentation: "journey",
       items: [
         { title: "Strategy Analysis", subtitle: "Step 1", text: "Do we need this change at all — and why?" },
         { title: "BA Planning and Monitoring", subtitle: "Step 2", text: "How will we conduct the analysis work?" },
